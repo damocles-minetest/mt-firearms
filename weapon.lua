@@ -1,5 +1,7 @@
 
-firearms.weapon = { }
+firearms.weapon = {
+	registered = {}
+}
 
 local special_inits = {
 	sniper_rifle = function(weapon_def)
@@ -8,8 +10,6 @@ local special_inits = {
 				or firearms.action.toggle_scope
 	end,
 }
-
-local registered = { }
 
 function firearms.weapon.register(name, weapon_def)
 
@@ -56,7 +56,7 @@ function firearms.weapon.register(name, weapon_def)
 	end
 
 	local name_noprefix = ((name:sub(1, 1) ~= ":") and name or name:sub(2))
-	registered[name_noprefix] = weapon_def
+	firearms.weapon.registered[name_noprefix] = weapon_def
 	if nil and weapon_def.mesh and firearms.config.get_bool("mesh_wieldview") then
 		weapon_def.wield_scale = nil
 		weapon_def.drawtype = "mesh"
